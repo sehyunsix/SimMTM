@@ -8,7 +8,7 @@ from torch.utils.data import Dataset
 from utils.timefeatures import time_features
 from data_provider.m4 import M4Dataset, M4Meta
 from data_provider.uea import subsample, interpolate_missing, Normalizer
-from sktime.utils import load_data
+from sktime.datasets import load_from_tsfile_to_dataframe
 import warnings
 from sklearn.preprocessing import StandardScaler
 
@@ -668,7 +668,7 @@ class UEAloader(Dataset):
         return all_df, labels_df
 
     def load_single(self, filepath):
-        df, labels = load_data.load_from_tsfile_to_dataframe(filepath, return_separate_X_and_y=True,
+        df, labels = load_from_tsfile_to_dataframe(filepath, return_separate_X_and_y=True,
                                                              replace_missing_vals_with='NaN')
         labels = pd.Series(labels, dtype="category")
         self.class_names = labels.cat.categories

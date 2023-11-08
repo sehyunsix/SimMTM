@@ -14,7 +14,7 @@ import numpy as np
 from collections import OrderedDict
 from tensorboardX import SummaryWriter
 import random
-
+from tqdm import tqdm
 warnings.filterwarnings('ignore')
 
 
@@ -226,6 +226,8 @@ class Exp_SimMTM(Exp_Basic):
         self.model.train()
         return vali_loss, valid_cl_loss, valid_rb_loss
 
+    from tqdm import tqdm
+
     def train(self, setting):
 
         # data preparation
@@ -255,7 +257,7 @@ class Exp_SimMTM(Exp_Basic):
 
             self.model.train()
             start_time = time.time()
-            for i, (batch_x, batch_y, batch_x_mark, batch_y_mark) in enumerate(train_loader):
+            for i, (batch_x, batch_y, batch_x_mark, batch_y_mark) in tqdm(enumerate(train_loader), total=train_steps, desc=f"Epoch {epoch+1}"):
                 iter_count += 1
                 model_optim.zero_grad()
 

@@ -1,6 +1,6 @@
 export CUDA_VISIBLE_DEVICES=0
 
-python -u run.py \
+python3 -u run.py \
     --task_name pretrain \
     --root_path ./dataset/ETT-small/ \
     --data_path ETTh2.csv \
